@@ -1,5 +1,15 @@
 # GUVI_HCL TASK - ‼️User Management System
 
+### 1. Registration Page
+![Profile Screenshot](assets/Screenshot%202025-10-01%20004618.png)
+
+### 2. Login Page
+![Login Screenshot](assets/Screenshot%202025-10-01%20004604.png)
+
+### 3. Profile Update Page
+![Home Screenshot](assets/Screenshot%202025-10-01%20004546.png)
+
+
 ## Complete Setup Guide
 
 ### Prerequisites Installation
