@@ -1,0 +1,194 @@
+# User Management System
+
+## Complete Setup Guide
+
+### Prerequisites Installation
+
+#### 1. Install XAMPP
+- Download XAMPP from: https://www.apachefriends.org/download.html
+- Install to default location: `C:\xampp`
+- Start Apache and MySQL from XAMPP Control Panel
+
+#### 2. Install MongoDB Community Server
+- Download from: https://www.mongodb.com/try/download/community
+- Install with default settings
+- MongoDB will run as Windows service automatically
+- Default port: 27017
+
+#### 3. Install Redis for Windows
+- Download from: https://github.com/microsoftarchive/redis/releases
+- Extract to `C:\redis`
+- Run `redis-server.exe` to start Redis
+- Default port: 6379
+
+#### 4. Install PHP Extensions
+
+**For Redis Extension:**
+1. Download `php_redis.dll` from: https://pecl.php.net/package/redis
+2. Copy to `C:\xampp\php\ext\`
+3. Add to `C:\xampp\php\php.ini`:
+   ```ini
+   extension=redis
+   ```
+
+**For MongoDB Extension:**
+1. Download `php_mongodb.dll` from: https://pecl.php.net/package/mongodb
+2. Copy to `C:\xampp\php\ext\`
+3. Add to `C:\xampp\php\php.ini`:
+   ```ini
+   extension=mongodb
+   ```
+
+### Database Setup
+
+#### 1. MySQL Database Setup
+1. Open phpMyAdmin: `http://localhost/phpmyadmin`
+2. Click "Import" tab
+3. Choose `database_setup.sql` file
+4. Click "Go" to execute
+
+**OR via MySQL Command Line:**
+```bash
+cd C:\xampp\mysql\bin
+mysql -u root -p
+source D:\Guvi_030\database_setup.sql
+```
+
+#### 2. MongoDB Setup
+- MongoDB will automatically create the database and collection
+- Database: `user_management`
+- Collection: `profiles`
+
+#### 3. Redis Setup
+- No initial setup required
+- Redis will store session data automatically
+
+### Installation Steps
+
+#### Method 1: Using XAMPP (Recommended)
+1. Copy entire project folder to `C:\xampp\htdocs\`
+2. Rename folder to `user_management`
+3. Start XAMPP Control Panel
+4. Start Apache and MySQL services
+5. Start MongoDB service (if not auto-started)
+6. Start Redis server: `C:\redis\redis-server.exe`
+7. Access: `http://localhost/user_management/`
+
+#### Method 2: Using PHP Built-in Server
+1. Open Command Prompt in project directory
+2. Run: `php -S localhost:8000`
+3. Access: `http://localhost:8000/`
+
+### Verification Steps
+
+#### Check Services are Running:
+```bash
+# Check MySQL
+tasklist | findstr "mysqld.exe"
+
+# Check MongoDB
+tasklist | findstr "mongod.exe"
+
+# Check Apache (if using XAMPP)
+tasklist | findstr "httpd.exe"
+
+# Check Redis
+tasklist | findstr "redis"
+```
+
+#### Test Database Connections:
+1. **MySQL**: Access phpMyAdmin at `http://localhost/phpmyadmin`
+2. **MongoDB**: Use MongoDB Compass or command line
+3. **Redis**: Use Redis CLI: `redis-cli ping`
+
+### Application Features
+
+- **User Registration**: Secure account creation with validation
+- **User Authentication**: Login with email/password
+- **Profile Management**: Update personal details (age, DOB, contact, address)
+- **Session Management**: Redis backend + localStorage frontend
+- **Security**: Password hashing, prepared statements, session validation
+
+### Tech Stack
+
+- **Frontend**: HTML5, CSS3, Bootstrap 5, jQuery
+- **Backend**: PHP 7.4+
+- **Databases**: MySQL 8.0+ (credentials), MongoDB 4.4+ (profiles)
+- **Cache**: Redis 6.0+ (sessions)
+- **Communication**: jQuery AJAX
+
+### Project Structure
+```
+Guvi_030/
+├── assets/           # Static assets
+├── css/
+│   └── style.css     # Custom styles
+├── js/
+│   ├── login.js      # Login functionality
+│   ├── profile.js    # Profile management
+│   └── register.js   # Registration logic
+├── php/
+│   ├── login.php     # Login API
+│   ├── profile.php   # Profile API
+│   └── register.php  # Registration API
+├── index.html        # Landing page
+├── login.html        # Login form
+├── profile.html      # Profile dashboard
+├── register.html     # Registration form
+├── database_setup.sql # MySQL schema
+└── README.md         # This file
+```
+
+### Application Flow
+1. **Registration** → MySQL stores user credentials
+2. **Login** → Validates credentials, creates Redis session
+3. **Profile** → MongoDB stores/retrieves profile data
+
+### Quick Start Commands
+
+```bash
+# Start all services (run each in separate command prompt)
+C:\xampp\apache\bin\httpd.exe
+C:\xampp\mysql\bin\mysqld.exe
+mongod
+C:\redis\redis-server.exe
+
+# Access application
+http://localhost/user_management/
+```
+
+### Troubleshooting
+
+#### Common Issues:
+
+**"Extension not found" errors:**
+- Ensure PHP extensions are properly installed
+- Restart Apache after adding extensions
+- Check `php.ini` configuration
+
+**Database connection errors:**
+- Verify MySQL service is running
+- Check database credentials in PHP files
+- Ensure `user_management` database exists
+
+**Redis connection errors:**
+- Start Redis server: `redis-server.exe`
+- Check if port 6379 is available
+- Verify Redis extension is loaded
+
+**MongoDB connection errors:**
+- Ensure MongoDB service is running
+- Check MongoDB extension installation
+- Verify port 27017 is accessible
+
+#### Support
+For issues, check:
+1. XAMPP error logs: `C:\xampp\apache\logs\error.log`
+2. PHP error logs: `C:\xampp\php\logs\php_error_log`
+3. Browser console for JavaScript errors
+
+### Security Notes
+- Passwords are hashed using PHP's `password_hash()`
+- All MySQL queries use prepared statements
+- Sessions expire after 24 hours
+- Input validation on both frontend and backend
