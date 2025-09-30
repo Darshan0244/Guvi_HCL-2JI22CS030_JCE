@@ -1,4 +1,4 @@
-# User Management System
+# GUVI_HCL TASK - ‼️User Management System
 
 ## Complete Setup Guide
 
@@ -65,7 +65,7 @@ source D:\Guvi_030\database_setup.sql
 
 ### Installation Steps
 
-#### Method 1: Using XAMPP (Recommended)
+#### Using XAMPP 
 1. Copy entire project folder to `C:\xampp\htdocs\`
 2. Rename folder to `user_management`
 3. Start XAMPP Control Panel
@@ -74,10 +74,6 @@ source D:\Guvi_030\database_setup.sql
 6. Start Redis server: `C:\redis\redis-server.exe`
 7. Access: `http://localhost/user_management/`
 
-#### Method 2: Using PHP Built-in Server
-1. Open Command Prompt in project directory
-2. Run: `php -S localhost:8000`
-3. Access: `http://localhost:8000/`
 
 ### Verification Steps
 
@@ -156,39 +152,3 @@ C:\redis\redis-server.exe
 # Access application
 http://localhost/user_management/
 ```
-
-### Troubleshooting
-
-#### Common Issues:
-
-**"Extension not found" errors:**
-- Ensure PHP extensions are properly installed
-- Restart Apache after adding extensions
-- Check `php.ini` configuration
-
-**Database connection errors:**
-- Verify MySQL service is running
-- Check database credentials in PHP files
-- Ensure `user_management` database exists
-
-**Redis connection errors:**
-- Start Redis server: `redis-server.exe`
-- Check if port 6379 is available
-- Verify Redis extension is loaded
-
-**MongoDB connection errors:**
-- Ensure MongoDB service is running
-- Check MongoDB extension installation
-- Verify port 27017 is accessible
-
-#### Support
-For issues, check:
-1. XAMPP error logs: `C:\xampp\apache\logs\error.log`
-2. PHP error logs: `C:\xampp\php\logs\php_error_log`
-3. Browser console for JavaScript errors
-
-### Security Notes
-- Passwords are hashed using PHP's `password_hash()`
-- All MySQL queries use prepared statements
-- Sessions expire after 24 hours
-- Input validation on both frontend and backend
